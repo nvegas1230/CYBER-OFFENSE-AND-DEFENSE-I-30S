@@ -36,17 +36,28 @@ menu_options() {
 		'c'|'C') set_operator;;
 		'd'|'D') calculate;;
 		'x'|'X') exit;;
+		*) echo "SELECT A VALID OPTION JUSTIN";;
 	esac
 }
 
 set_first_number() {
 	read -p "Enter the first number: " input
-	num_one=$input
+
+	if [[ $input =~ ^[+-]?[0-9]*\.?[0-9]+$ ]]; then
+		num_one=$input
+	else
+		echo "Please input a number and not a word or letter."
+	fi
 }
 
 set_second_number() {
 	read -p "Enter the second number: " input
-	num_two=$input
+
+	if [[ $input =~ ^[+-]?[0-9]*\.?[0-9]+$ ]]; then
+		num_two=$input
+	else
+		echo "Please input a number and not a word or letter."
+	fi
 }
 
 set_operator() {
@@ -62,6 +73,7 @@ set_operator() {
 
 calculate() {
 	if [[ -z $num_one || -z $num_two || -z $operator ]]; then
+		echo "Please supply two numbers and an operator to calculate."
 		return
 	fi
 
